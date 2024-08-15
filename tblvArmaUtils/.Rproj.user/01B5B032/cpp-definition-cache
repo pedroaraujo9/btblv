@@ -1,0 +1,69 @@
+[
+    {
+        "file": "/home/pedro/Documents/GitHub/tblv/packages/tblvArmaUtils/src/marginal_likelihood.cpp",
+        "file_last_write": 1722603086.0,
+        "definitions": [
+            {
+                "usr": "c:@F@inplace_tri_mat_mult#&$@N@arma@S@Row>#d#&1$@N@arma@S@Mat>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "inplace_tri_mat_mult(arma::rowvec &, const arma::mat &)",
+                "file": "/home/pedro/Documents/GitHub/tblv/packages/tblvArmaUtils/src/marginal_likelihood.cpp",
+                "line": 8,
+                "column": 6,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@dmvnrm_arma_fast#&1$@N@arma@S@Mat>#d#&1$@N@arma@S@Row>#d#S0_#1b#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "dmvnrm_arma_fast(const arma::mat &, const arma::rowvec &, const arma::mat &, const bool)",
+                "file": "/home/pedro/Documents/GitHub/tblv/packages/tblvArmaUtils/src/marginal_likelihood.cpp",
+                "line": 19,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@expand_vec#$@N@arma@S@Col>#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "expand_vec(arma::vec, int)",
+                "file": "/home/pedro/Documents/GitHub/tblv/packages/tblvArmaUtils/src/marginal_likelihood.cpp",
+                "line": 44,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@calc_log_like_sample#$@N@arma@S@Col>#d#$@N@arma@S@Mat>#d#S1_#S1_#S1_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "calc_log_like_sample(arma::vec, arma::mat, arma::mat, arma::mat, arma::mat)",
+                "file": "/home/pedro/Documents/GitHub/tblv/packages/tblvArmaUtils/src/marginal_likelihood.cpp",
+                "line": 50,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@rcpp_mc_log_mlike#I#$@N@arma@S@Mat>#d#S0_#S0_#S0_#d#d#$@N@Rcpp@S@Vector>#VI19#@N@Rcpp@ST>1#T@PreserveStorage#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rcpp_mc_log_mlike(int, arma::mat, arma::mat, arma::mat, arma::mat, double, double, Rcpp::List)",
+                "file": "/home/pedro/Documents/GitHub/tblv/packages/tblvArmaUtils/src/marginal_likelihood.cpp",
+                "line": 71,
+                "column": 11,
+                "hidden": false
+            },
+            {
+                "usr": "c:@F@LSE#$@N@arma@S@Col>#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "LSE(arma::vec)",
+                "file": "/home/pedro/Documents/GitHub/tblv/packages/tblvArmaUtils/src/marginal_likelihood.cpp",
+                "line": 125,
+                "column": 8,
+                "hidden": false
+            }
+        ],
+        "hidden": false
+    }
+]
