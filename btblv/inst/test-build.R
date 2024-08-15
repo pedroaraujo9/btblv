@@ -22,6 +22,12 @@ devtools::clean_dll()
 pkgbuild::compile_dll()
 
 
+devtools::install_github(repo = "pedroaraujo9/btblv", subdir = "btblv")
+devtools::install_github(repo = "pedroaraujo9/btblv", subdir = "tblvArmaUtils")
+
+
+
+
 usethis::use_test("imifa_to_blv")
 
 library(IMIFA)
