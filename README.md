@@ -75,7 +75,7 @@ btblv::check_fit(post_pred, post_summ)
 ```r
 
 # BIC with an approximation for the marginal likelihood
-tblvArmaUtils::compute_BIC(post, N = 100000, cores = 4)
+tblvArmaUtils::compute_BIC(post, N = 100000, cores = 4, seed = 1)
 
 # WAIC with the package loo
 btblv::compute_WAIC(post)
