@@ -63,7 +63,7 @@ post |> btblv::check_convergence()
 #### Posterior summaries and posterior predicted distribution 
 ```r
 post_summ = post |> btblv::posterior_summary()
-post_pred = post |> btblv::posterior_predicit(seed = 1)
+post_pred = post |> btblv::posterior_predict(seed = 1)
 ```
 
 #### Model fit metrics 
@@ -74,7 +74,7 @@ btblv::check_fit(post_pred, post_summ)
 #### WAIC and BIC
 ```r
 
-# BIC with a approximation for the marginal likelihood
+# BIC with an approximation for the marginal likelihood
 tblvArmaUtils::compute_BIC(post, N = 100000, cores = 4)
 
 # WAIC with the package loo
