@@ -68,6 +68,9 @@ extract_posterior = function(btblv_fit,
   }
 
   if((apply_varimax == TRUE) & (btblv_fit$btblv_data$data_list_stan$K  > 1)) {
+
+    post_sample$rot_alpha = .apply_rotation(post_sample$alpha, rotation_list)
+
     vmax = stats::varimax(reference_matrix)
     reference_matrix = reference_matrix %*% vmax$rotmat
   }

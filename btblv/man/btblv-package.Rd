@@ -6,12 +6,11 @@
 \alias{btblv}
 \title{The 'btblv' package.}
 \description{
-A DESCRIPTION OF THE PACKAGE
+Package to fit time-dependent beta latent variable models
 }
 \references{
 Stan Development Team (NA). RStan: the R interface to Stan. R package version 2.32.6. https://mc-stan.org
 }
 \author{
-\strong{Maintainer}: First Last \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
-
+Pedro Menezes de Araujo
 }

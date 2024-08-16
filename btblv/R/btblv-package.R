@@ -1,7 +1,7 @@
 #' The 'btblv' package.
 #'
-#' @description A DESCRIPTION OF THE PACKAGE
-#'
+#' @description Package to fit time-dependent beta latent variable models
+#' @author Pedro Menezes de Araujo
 #' @docType package
 #' @name btblv-package
 #' @aliases btblv
