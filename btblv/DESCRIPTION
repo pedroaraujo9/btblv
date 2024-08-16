@@ -1,11 +1,11 @@
 Package: btblv
-Title: Fit Bayesian time-dependent beta latent variable models with stan.
+Title: Fit Bayesian time-dependent beta latent variable models with stan
 Version: 0.0.0.9000
 Authors@R: 
     person("Pedro", "Menezes de eAraujo", , "pedromenezes98@gmail.com", 
             role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-9840-813X"))
-Description: Fit Bayesian time-dependent beta latent variable models with stan.
+Description: Fit Bayesian time-dependent beta latent variable models with Stan.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -41,6 +41,7 @@ LinkingTo:
     StanHeaders (>= 2.18.0)
 SystemRequirements: GNU make
 LazyData: true
+LazyDataCompression: xz
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

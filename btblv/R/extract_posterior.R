@@ -9,9 +9,17 @@
 #' Default is `FALSE`.
 #' @param add_btblv_fit logical value indicating if the object should contain the `btblv_fit` object.
 #' Default is TRUE.
-
 #'
-#' @return object of the class `btblv_posterior`.
+#' @return object of the class `btblv_posterior` with the following attributes:
+#' \describe{
+#'   \item{post_sample_array}{List where each element is an arrray with the permuted posterior distribution for the parameters.}
+#'   \item{post_sample_chains}{List where each element is the an array with the posterior distribution by chain for each parameter.}
+#'   \item{rotations}{List with all `vegan::procrustes` results for each iteration of the posterior.}
+#'   \item{btblv_data}{`btblv_data` object use to fit the model.}
+#'   \item{precision}{type of precision of the fit.}
+#'   \item{is_varimax}{`TRUE` if varimax transformed was applied.}
+#'   \item{alpha_reference}{the reference matrix used for the procrustes rotation.}
+#' }
 #' @export
 #'
 #' @examples
@@ -69,10 +77,12 @@ extract_posterior = function(btblv_fit,
 
   if((apply_varimax == TRUE) & (btblv_fit$btblv_data$data_list_stan$K  > 1)) {
 
-    post_sample$rot_alpha = .apply_rotation(post_sample$alpha, rotation_list)
+    rotation_list = .get_rotation(post_sample$alpha, reference_matrix)
+    rot_alpha_init = .apply_rotation(post_sample$alpha, rotation_list)
+    alpha_post_mean = .compute_posterior_mean(rot_alpha_init)
 
-    vmax = stats::varimax(reference_matrix)
-    reference_matrix = reference_matrix %*% vmax$rotmat
+    vmax = stats::varimax(alpha_post_mean)
+    reference_matrix = alpha_post_mean %*% vmax$rotmat
   }
 
 

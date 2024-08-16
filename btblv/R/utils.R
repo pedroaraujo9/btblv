@@ -1,3 +1,12 @@
+# define global variables
+gv = c(
+  c(".", "K", "ind_num", "y", "ind_num",
+    "time_num", "group_num", "lag_ind",
+    "group", "time", "item_num", "item", "iter", "mu")
+)
+
+utils::globalVariables(gv)
+
 #' Simulate matrix from a uniform distribution
 #'
 #' @param nrow number of rows.
@@ -10,7 +19,7 @@
 #' @examples
 #' # .simulate_uniform_matrix(ncol=2, nrow=100, lower=-1, upper=1)
 .simulate_uniform_matrix = function(ncol, nrow, lower, upper) {
-  m = runif(nrow*ncol, min = lower, max = upper) %>%
+  m = stats::runif(nrow*ncol, min = lower, max = upper) %>%
     matrix(nrow = nrow, ncol = ncol)
 
   return(m)
@@ -28,7 +37,8 @@
 #' @examples
 #' # .simulate_normal_matrix(ncol=100, nrow=2, mu=10, sigma=3)
 .simulate_normal_matrix = function(ncol, nrow, mu, sigma) {
-  m = matrix(rnorm(nrow*ncol, mean = mu, sd = sigma), nrow = nrow, ncol = ncol)
+  m = stats::rnorm(nrow*ncol, mean = mu, sd = sigma) %>%
+    base::matrix(nrow = nrow, ncol = ncol)
   return(m)
 }
 
@@ -66,10 +76,10 @@
       list(
         E = .simulate_normal_matrix(nrow = n, ncol = K, mu = 0, sigma = 0.1),
         alpha = .simulate_normal_matrix(nrow = J, ncol = K, mu = 0, sigma = 0.1),
-        beta = beta_mle + rnorm(n=J, sd = 0.1),
-        log_sigma = rnorm(Ng, 0, 0.1),
-        phi = runif(Ng, -0.1, 0.1),
-        log_kappa = mean(precision_mle) + rnorm(n = 1, sd = 0.1)
+        beta = beta_mle + stats::rnorm(n=J, sd = 0.1),
+        log_sigma = stats::rnorm(Ng, 0, 0.1),
+        phi = stats::runif(Ng, -0.1, 0.1),
+        log_kappa = mean(precision_mle) + stats::rnorm(n = 1, sd = 0.1)
       )
     })
   }else if(precision == "specific"){
@@ -77,11 +87,11 @@
       list(
         E = .simulate_normal_matrix(nrow = n, ncol = K, mu = 0, sigma = 0.1),
         alpha = .simulate_normal_matrix(nrow = J, ncol = K, mu = 0, sigma = 0.1),
-        beta = beta_mle + rnorm(n=J, sd = 0.1),
-        log_sigma = rnorm(Ng, 0, 0.1),
-        phi = runif(Ng, -0.1, 0.1),
-        baseline_delta = mean(precision_mle) + rnorm(n = 1, sd = 0.1),
-        delta_raw = precision_mle[-J] - mean(precision_mle) + rnorm(n = 1, sd = 0.1)
+        beta = beta_mle + stats::rnorm(n=J, sd = 0.1),
+        log_sigma = stats::rnorm(Ng, 0, 0.1),
+        phi = stats::runif(Ng, -0.1, 0.1),
+        baseline_delta = mean(precision_mle) + stats::rnorm(n = 1, sd = 0.1),
+        delta_raw = precision_mle[-J] - mean(precision_mle) + stats::rnorm(n = 1, sd = 0.1)
       )
     })
   }
@@ -289,10 +299,10 @@ inv_logit = function(x) {
       tibble::as_tibble() %>%
       dplyr::mutate(id = stringr::str_remove(id, "V") %>% as.integer()) %>%
       dplyr::group_by(id, K) %>%
-      dplyr::summarise(mean = mean(value),
-                       sd = sd(value),
+      dplyr::summarise(mean = base::mean(value),
+                       sd = stats::sd(value),
                        li = HDInterval::hdi(value, credMass = cred_mass)[1],
-                       median = median(value),
+                       median = stats::median(value),
                        ui = HDInterval::hdi(value, credMass = cred_mass)[2]) %>%
       ungroup()
 
@@ -304,20 +314,20 @@ inv_logit = function(x) {
       tibble::as_tibble() %>%
       dplyr::mutate(id = stringr::str_remove(id, "V") %>% as.integer()) %>%
       dplyr::group_by(id) %>%
-      dplyr::summarise(mean = mean(value),
-                       sd = sd(value),
+      dplyr::summarise(mean = base::mean(value),
+                       sd = stats::sd(value),
                        li = HDInterval::hdi(value, credMass = cred_mass)[1],
-                       median = median(value),
+                       median = stats::median(value),
                        ui = HDInterval::hdi(value, credMass = cred_mass)[2]) %>%
       ungroup()
 
   }else if(length(array_dim) == 1) {
     value = post_array
     post_summary = data.frame(
-      mean = mean(value),
-      sd = sd(value),
+      mean = base::mean(value),
+      sd = stats::sd(value),
       li = HDInterval::hdi(value, credMass = cred_mass)[1] %>% as.numeric(),
-      median = median(value),
+      median = stats::median(value),
       ui = HDInterval::hdi(value, credMass = cred_mass)[2] %>% as.numeric()
     )
   }

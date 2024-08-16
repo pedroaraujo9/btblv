@@ -46,7 +46,7 @@ check_fit = function(posterior_predict, posterior_summary) {
     RMSE = .compute_RMSE(observed_dist, pred_post_dist),
     MAE = .compute_MAE(observed_dist, pred_post_dist),
     MAPE = .compute_MAPE(observed_dist, pred_post_dist),
-    corr = cor(latent_distance, observed_dist, method = "spearman")
+    corr = stats::cor(latent_distance, observed_dist, method = "spearman")
   )
 
   global_metrics = pred_post_summary_df %>%

@@ -26,7 +26,16 @@ Default is \code{FALSE}.}
 Default is TRUE.}
 }
 \value{
-object of the class \code{btblv_posterior}.
+object of the class \code{btblv_posterior} with the following attributes:
+\describe{
+\item{post_sample_array}{List where each element is an arrray with the permuted posterior distribution for the parameters.}
+\item{post_sample_chains}{List where each element is the an array with the posterior distribution by chain for each parameter.}
+\item{rotations}{List with all \code{vegan::procrustes} results for each iteration of the posterior.}
+\item{btblv_data}{\code{btblv_data} object use to fit the model.}
+\item{precision}{type of precision of the fit.}
+\item{is_varimax}{\code{TRUE} if varimax transformed was applied.}
+\item{alpha_reference}{the reference matrix used for the procrustes rotation.}
+}
 }
 \description{
 Extract sample posterior from btblv_fit object

@@ -32,7 +32,7 @@ posterior_predict = function(btblv_posterior, seed, cred_mass = 0.95) {
   item = btblv_posterior$btblv_data$data$item_num
   ind = btblv_posterior$btblv_data$data$ind_num
 
-  if(class(btblv_posterior) == "btblv_posterior") {
+  if(inherits(btblv_posterior, "btblv_posterior")) {
 
     for(i in 1:iters) {
 
@@ -45,10 +45,10 @@ posterior_predict = function(btblv_posterior, seed, cred_mass = 0.95) {
         kappa_iter = kappa[i, item]
       }
 
-      pred_post_sample[i, ] = rbeta(N, mu_iter*kappa_iter, (1-mu_iter)*kappa_iter)
+      pred_post_sample[i, ] = stats::rbeta(N, mu_iter*kappa_iter, (1-mu_iter)*kappa_iter)
     }
 
-  }else if(class(btblv_posterior) == "fa_imifa_posterior") {
+  }else if(inherits(btblv_posterior, "fa_imifa_posterior")) {
 
     for(i in 1:iters) {
 
@@ -60,7 +60,7 @@ posterior_predict = function(btblv_posterior, seed, cred_mass = 0.95) {
         kappa_iter = kappa[i, item]
       }
 
-      pred_post_sample[i, ] = rnorm(N, mu_iter, sqrt(kappa_iter)) %>% exp()
+      pred_post_sample[i, ] = stats::rnorm(N, mu_iter, sqrt(kappa_iter)) %>% exp()
 
     }
   }
@@ -72,9 +72,9 @@ posterior_predict = function(btblv_posterior, seed, cred_mass = 0.95) {
     item = btblv_posterior$btblv_data$data$item,
     y = btblv_posterior$btblv_data$data$y,
     mean = pred_post_sample %>% colMeans(),
-    sd = pred_post_sample %>% apply(MARGIN = 2, FUN = sd),
+    sd = pred_post_sample %>% apply(MARGIN = 2, FUN = stats::sd),
     li = pred_post_sample %>% apply(MARGIN = 2, function(x) HDInterval::hdi(x, credMass = cred_mass)[1]),
-    median = pred_post_sample %>% apply(MARGIN = 2, FUN = median),
+    median = pred_post_sample %>% apply(MARGIN = 2, FUN = stats::median),
     ui = pred_post_sample %>% apply(MARGIN = 2, function(x) HDInterval::hdi(x, credMass = cred_mass)[2])
   )
 
