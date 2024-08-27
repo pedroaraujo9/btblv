@@ -11,7 +11,7 @@ devtools::check()
 devtools::build()
 devtools::document()
 devtools::load_all()
-devtools::test(filter = "extract_posterior")
+devtools::test(filter = "plot_latent_effects")
 devtools::test(filter = "check_fit")
 devtools::test()
 devtools::install()
@@ -25,7 +25,57 @@ pkgbuild::compile_dll()
 devtools::install_github(repo = "pedroaraujo9/btblv", subdir = "btblv")
 devtools::install_github(repo = "pedroaraujo9/btblv", subdir = "tblvArmaUtils")
 
+plot_latent_effects = function(posterior_summary, highlight = NULL) {
 
+  theta_df = posterior_summary$posterior_summary_df$theta
+  group_col_name = names(theta_df)[7]
+  time_col_name = names(theta_df)[8]
+
+  names(theta_df)[7:8] = c("group", "time")
+
+  theta_wide = theta_df %>%
+    dplyr::select(mean, group, time, K) %>%
+    tidyr::spread(K, mean)
+
+  if(!is.null(highlight)) {
+    pl = theta_df %>%
+      mutate(sel_group = ifelse(group %in% highlight, group, "Others")) %>%
+      mutate(sel_alpha = ifelse(sel_group == "Others", "Others", "Sel")) %>%
+      mutate(K = paste0("Dimension ", K)) %>%
+      ggplot(aes(x=time, y=mean, group=group, color=sel_group, alpha = sel_alpha)) +
+      geom_line() +
+      geom_hline(yintercept = 0, linetype = "dashed") +
+      scale_alpha_manual(values = c(0.16, 1), guide = "none") +
+      facet_wrap(K ~ ., scales = "free_y") +
+      labs(x=time_col_name,
+           y=latex2exp::TeX("$\\theta_{ik}^{(t)}$"),
+           color=paste0(group_col_name, ":")) +
+      theme(legend.position = "top", text = element_text(size = 9))
+  }else{
+    pl = theta_df %>%
+      mutate(K = paste0("Dimension ", K)) %>%
+      ggplot(aes(x=time, y=mean, group=group)) +
+      geom_line() +
+      geom_hline(yintercept = 0, linetype = "dashed") +
+      facet_wrap(K ~ ., scales = "free_y") +
+      labs(x=time_col_name,
+           y=latex2exp::TeX("$\\theta_{ik}^{(t)}$"),
+           color=paste0(group_col_name, ":")) +
+      theme(legend.position = "top", text = element_text(size = 9))
+  }
+
+  return(pl)
+}
+
+summ %>% plot_latent_effects(highlight_group = c("Russia", "Ukraine", "Belarus"))
+summ %>% plot_latent_effects()
+
+usethis::use_test("plot_latent_effects")
+
+
+summ = example_fit$specific_K1 %>%
+  extract_posterior() %>%
+  posterior_summary()
 
 
 usethis::use_test("imifa_to_blv")
