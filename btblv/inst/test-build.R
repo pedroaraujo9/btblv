@@ -12,7 +12,7 @@ devtools::build()
 devtools::document()
 devtools::load_all()
 devtools::test(filter = "plot_latent_effects")
-devtools::test(filter = "check_fit")
+devtools::test(filter = "plot_trend")
 devtools::test()
 devtools::install()
 
@@ -24,6 +24,18 @@ pkgbuild::compile_dll()
 
 devtools::install_github(repo = "pedroaraujo9/btblv", subdir = "btblv")
 devtools::install_github(repo = "pedroaraujo9/btblv", subdir = "tblvArmaUtils")
+
+devtools::load_all()
+example_fit$single_K1$btblv_data$df %>%
+  create_btblv_data("mx", "age", "country", "year") %>%
+  plot_corrmatrix(transform = NULL)
+
+example_fit$single_K1$btblv_data$df %>%
+  create_btblv_data("mx", "age", "country", "year") %>%
+  plot_trend(transform = NULL)
+
+usethis::use_test("plot_trend")
+
 
 plot_latent_effects = function(posterior_summary, highlight = NULL) {
 
@@ -105,6 +117,14 @@ imifa_result = list()
 btblv_data = btblv::create_btblv_data(
   lf, "mx", "age", "country", "year"
 )
+
+
+
+
+
+
+
+
 
 data("example_fit")
 

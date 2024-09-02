@@ -5,11 +5,12 @@
 #'
 #' @return ggplot graph object
 #' @export
+#' @importFrom latex2exp TeX
 #'
 #' @examples
-#' # example_fit$specific_K1 %>%
-#' # extract_posterior() %>%
-#' # posterior_summary() %>%
+#' # example_fit$specific_K1 |>
+#' # extract_posterior() |>
+#' # posterior_summary() |>
 #' # plot_latent_effects()
 #'
 plot_latent_effects = function(posterior_summary, highlight = NULL) {
