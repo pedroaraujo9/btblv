@@ -2,7 +2,8 @@
 gv = c(
   c(".", "K", "ind_num", "y", "ind_num",
     "time_num", "group_num", "lag_ind",
-    "group", "time", "item_num", "item", "iter", "mu")
+    "group", "time", "item_num", "item", "iter", "mu",
+    "item1", "item2", "value", "sel_group", "sel_alpha", "tau")
 )
 
 utils::globalVariables(gv)
@@ -505,3 +506,8 @@ inv_logit = function(x) {
   matrix[base::lower.tri(matrix)]
 }
 
+
+.get_tau = function(x) {
+  tau = EnvStats::kendallTrendTest(x, ci.slope=F)
+  return(tau$estimate["tau"])
+}
