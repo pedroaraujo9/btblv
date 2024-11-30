@@ -1,9 +1,9 @@
 # define global variables
 gv = c(
-  c(".", "K", "ind_num", "y", "ind_num",
-    "time_num", "group_num", "lag_ind",
-    "group", "time", "item_num", "item", "iter", "mu",
-    "item1", "item2", "value", "sel_group", "sel_alpha", "tau")
+  ".", "K", "ind_num", "y", "ind_num",
+  "time_num", "group_num", "lag_ind",
+  "group", "time", "item_num", "item", "iter", "mu",
+  "item1", "item2", "value", "sel_group", "sel_alpha", "tau"
 )
 
 utils::globalVariables(gv)
