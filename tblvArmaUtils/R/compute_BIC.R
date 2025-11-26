@@ -31,7 +31,6 @@ compute_BIC = function(btblv_posterior,
   
   data_list_stan = btblv_posterior$btblv_data$data_list_stan
   
-  n_obs = data_list_stan$N
   n = data_list_stan$n
   J = data_list_stan$J
   K = data_list_stan$K
@@ -46,7 +45,7 @@ compute_BIC = function(btblv_posterior,
     num_param = num_param + J
   }
   
-  bic = -2*sum(mloglike) + num_param*log(n_obs)
+  bic = -2*sum(mloglike) + num_param*log(n)
   return(bic)
   
 }
