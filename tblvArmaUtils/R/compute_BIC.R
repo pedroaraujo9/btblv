@@ -37,7 +37,7 @@ compute_BIC = function(btblv_posterior,
   K = data_list_stan$K
   Ng = data_list_stan$Ng
   
-  num_param = n*K + J*K + J + 2*Ng 
+  num_param = J*K + J + 2*Ng 
   
   if(btblv_posterior$precision == "single") {
     num_param = num_param + 1
