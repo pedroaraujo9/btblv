@@ -28,7 +28,7 @@ plot_trend = function(btblv_data) {
 
   pl = tau_over_time %>%
     ggplot2::ggplot(ggplot2::aes(x=factor(item), y=group, fill=tau)) +
-    ggplot2::geom_tile(color="white") +
+    ggplot2::geom_tile(color="black") +
     viridis::scale_fill_viridis() +
     ggplot2::labs(fill=expression(tau))
 
