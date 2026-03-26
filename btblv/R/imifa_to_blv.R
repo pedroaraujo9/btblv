@@ -9,7 +9,7 @@
 #'
 #' @examples
 #' #
-imifa_to_blv = function(btblv_data, imifa_result) {
+imifa_to_blv = function(btblv_data, imifa_result, trans_func) {
   alpha_dim = dim(imifa_result$Loadings$lmats$Cluster1)
   theta_dim = dim(imifa_result$Scores$eta)
 
@@ -20,7 +20,7 @@ imifa_to_blv = function(btblv_data, imifa_result) {
 
   btblv_data$data_list_stan$K = K
 
-  fix_mu = btblv_data$data_list_stan$x %>% log() %>% colMeans()
+  fix_mu = btblv_data$data_list_stan$x %>% trans_func() %>% colMeans()
 
   beta = imifa_result$Means$mus$Cluster1 %>% t()
 
